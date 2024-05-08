@@ -7,7 +7,6 @@ from selenium.common.exceptions import TimeoutException
 import time
 
 try:
-
     # Configurações do Chrome para ativar o modo Headless
     chrome_options = Options()
     chrome_options.add_argument("--headless")
@@ -270,6 +269,28 @@ try:
     print("Nota 2 Bimestre de Quimica: ", textMedia2BimestreQuimica)
     print("Nota 3 Bimestre de Quimica: ", textMedia3BimestreQuimica)
     print("Nota 4 Bimestre de Quimica: ", textMedia4BimestreQuimica)
+    print("\n---------------------------- \n")
+
+    # Pegando o percentual de falta do 1º bimestre até o 4º bimestre
+    elementPercentualFalta1Bi = WebDriverWait(driver, 5).until(
+        EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/table/tbody/tr[11]/td[4]"))
+    )
+    elementPercentualFalta2Bi= WebDriverWait(driver, 5).until(
+        EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/table/tbody/tr[11]/td[7]"))
+    )
+    elementPercentualFalta3Bi = WebDriverWait(driver, 5).until(
+        EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/table/tbody/tr[11]/td[10]"))
+    )
+    elementPercentualFalta4Bi = WebDriverWait(driver, 5).until(
+        EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/table/tbody/tr[11]/td[13]"))
+    )
+    textPercentualFalta1Bi = elementPercentualFalta1Bi.text[0:3].replace(",", ".")
+    textPercentualFalta2Bi = elementPercentualFalta2Bi.text[0:3].replace(",", ".")
+    textPercentualFalta3Bi = elementPercentualFalta3Bi.text[0:3].replace(",", ".")
+    textPercentualFalta4Bi = elementPercentualFalta4Bi.text[0:3].replace(",", ".")
+
+    somaPercentualFalta = float(textPercentualFalta1Bi) + float(textPercentualFalta2Bi) + float(textPercentualFalta3Bi) + float(textPercentualFalta4Bi)
+    print("Percentual Total de Faltas do ano:", str(somaPercentualFalta) + "%")
     print("\n---------------------------- \n")
     print("Todas suas notas foram exibidas, script finalizado!")
 
