@@ -1,11 +1,12 @@
 # Automação de Consulta de Notas no SIEPE
 
-Este projeto consiste em um script Python para automatizar a consulta das notas dos alunos no sistema SIEPE (Sistema Integrado de Educação de Pernambuco). O script utiliza a biblioteca Selenium para realizar a automação do navegador Chrome.
+Este projeto consiste em um script Python para automatizar a consulta das notas dos alunos no sistema SIEPE (Sistema Integrado de Educação de Pernambuco). O script utiliza as bibliotecas Selenium e ReportLab para realizar a automação do navegador Chrome e gerar relatórios em PDF, respectivamente.
 
 ## Pré-requisitos
 
 - Python 3.x instalado no sistema.
 - Biblioteca Selenium instalada. Você pode instalar utilizando o seguinte comando: pip install selenium
+- Biblioteca ReportLab instalada para gerar os PDFs. Você pode instalar utilizando o seguinte comando: pip install reportlab
 - Driver do Chrome compatível com a versão do seu navegador. Certifique-se de baixar o driver adequado para sua versão do Chrome [aqui](https://sites.google.com/a/chromium.org/chromedriver/downloads) e garantir que o diretório do driver esteja no PATH do sistema.
 
 ## Funcionalidades
