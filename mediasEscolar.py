@@ -5,8 +5,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.common.exceptions import TimeoutException
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
 import time
-import math
 
 try:
     # Configurações do Chrome para ativar o modo Headless
@@ -14,7 +15,7 @@ try:
     chrome_options.add_argument("--headless")
     chrome_driver_path = r"c:\chromedriver\chromedriver.exe"
     service = Service(chrome_driver_path)
-    driver = webdriver.Chrome(service=service,options=chrome_options)
+    driver = webdriver.Chrome(service=service, options=chrome_options)
 
     # Define o tamanho da janela
     driver.set_window_size(1366, 1080)
@@ -838,9 +839,256 @@ try:
     textPercentualFalta4Bi = elementPercentualFalta4Bi.text[0:3].replace(",", ".")
 
     somaPercentualFalta = float(textPercentualFalta1Bi) + float(textPercentualFalta2Bi) + float(textPercentualFalta3Bi) + float(textPercentualFalta4Bi)
-    print("Percentual Total de Faltas do ano:", str(somaPercentualFalta) + "%")
+    print("Percentual Total de Faltas do ano:", str(somaPercentualFalta)[0:4] + "%")
+
     print("\n---------------------------- \n")
-    print("Todas suas notas foram exibidas, script finalizado!")
+    print("Todas suas notas foram exibidas!")
+    print("\n---------------------------- \n")
+
+    print("Aguarde, estamos gerando seu PDF com suas notas!")
+
+    pdfAluno = canvas.Canvas(f"Medias_{primeiroNomeEstudante}.pdf", pagesize=A4)
+    pdfAluno.drawString(30, 800, "Escola: Erundina Negreiros de Arújo")
+    pdfAluno.drawString(30, 780, f"Estudante: {primeiroNomeEstudante}")
+    pdfAluno.drawString(30, 760, "Confira suas notas:")
+
+    # Biologia
+    pdfAluno.drawString(30, 730, "Biologia:")
+
+    # 1 Bimestre
+    if not isinstance(textMedia1BimestreBiologia, int):
+        pdfAluno.drawString(40, 710, f"1° Bimestre: {textMedia1BimestreBiologia.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 710, f"1° Bimestre: {textMedia1BimestreBiologia}")
+        
+    # 2 Bimestre
+    if not isinstance(textMedia2BimestreBiologia, int):
+        pdfAluno.drawString(40, 690, f"2° Bimestre: {textMedia2BimestreBiologia.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 690, f"2° Bimestre: {textMedia2BimestreBiologia}")
+
+    # 3 Bimestre
+    if not isinstance(textMedia3BimestreBiologia, int):
+        pdfAluno.drawString(40, 670, f"3° Bimestre: {textMedia3BimestreBiologia.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 670, f"3° Bimestre: {textMedia3BimestreBiologia}")
+
+    # 4 Bimestre
+    if not isinstance(textMedia4BimestreBiologia, int):
+        pdfAluno.drawString(40, 650, f"4° Bimestre: {textMedia4BimestreBiologia.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 650, f"4° Bimestre: {textMedia4BimestreBiologia}")
+
+    pdfAluno.drawString(40, 630, f"Média Anual: {resultadoTextMediaBiologia}")
+
+    # Fisica
+    pdfAluno.drawString(30, 600, "Física:")
+
+    # 1 Bimestre
+    if not isinstance(textMedia1BimestreFisica, int):
+        pdfAluno.drawString(40, 580, f"1° Bimestre: {textMedia1BimestreFisica.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 580, f"1° Bimestre: {textMedia1BimestreFisica}")
+
+    # 2 Bimestre
+    if not isinstance(textMedia2BimestreFisica, int):
+        pdfAluno.drawString(40, 560, f"2° Bimestre: {textMedia2BimestreFisica.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 560, f"2° Bimestre: {textMedia2BimestreFisica}")
+
+    # 3 Bimestre
+    if not isinstance(textMedia3BimestreFisica, int):
+        pdfAluno.drawString(40, 540, f"3° Bimestre: {textMedia3BimestreFisica.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 540, f"3° Bimestre: {textMedia3BimestreFisica}")
+
+    # 4 Bimestre
+    if not isinstance(textMedia4BimestreFisica, int):
+        pdfAluno.drawString(40, 520, f"4° Bimestre: {textMedia4BimestreFisica.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 520, f"4° Bimestre: {textMedia4BimestreFisica}")
+        
+    pdfAluno.drawString(40, 500, f"Média Anual: {resultadoTextMediaFisica}")
+
+    # Geografia
+    pdfAluno.drawString(30, 470, "Geografia:")
+
+    # 1 Bimestre
+    if not isinstance(textMedia1BimestreGeografia, int):
+        pdfAluno.drawString(40, 450, f"1° Bimestre: {textMedia1BimestreGeografia.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 450, f"1° Bimestre: {textMedia1BimestreGeografia}")
+
+    # 2 Bimestre
+    if not isinstance(textMedia2BimestreGeografia, int):
+        pdfAluno.drawString(40, 430, f"1° Bimestre: {textMedia2BimestreGeografia.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 430, f"1° Bimestre: {textMedia2BimestreGeografia}")
+
+    # 3 Bimestre
+    if not isinstance(textMedia3BimestreGeografia, int):
+        pdfAluno.drawString(40, 410, f"1° Bimestre: {textMedia3BimestreGeografia.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 410, f"1° Bimestre: {textMedia3BimestreGeografia}")
+
+    # 4 Bimestre
+    if not isinstance(textMedia4BimestreGeografia, int):
+        pdfAluno.drawString(40, 390, f"1° Bimestre: {textMedia4BimestreGeografia.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 390, f"1° Bimestre: {textMedia4BimestreGeografia}")
+
+    pdfAluno.drawString(40, 370, f"Média Anual: {resultadoTextMediaGeografia}")
+
+    # Historia
+    pdfAluno.drawString(30, 340, "História:")
+
+    # 1 Bimestre
+    if not isinstance(textMedia1BimestreHistoria, int):
+        pdfAluno.drawString(40, 320, f"1° Bimestre: {textMedia1BimestreHistoria.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 320, f"1° Bimestre: {textMedia1BimestreHistoria}")
+
+    # 2 Bimestre
+    if not isinstance(textMedia2BimestreHistoria, int):
+        pdfAluno.drawString(40, 300, f"2° Bimestre: {textMedia2BimestreHistoria.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 300, f"2° Bimestre: {textMedia2BimestreHistoria}")
+
+    # 3 Bimestre
+    if not isinstance(textMedia3BimestreHistoria, int):
+        pdfAluno.drawString(40, 280, f"3° Bimestre: {textMedia3BimestreHistoria.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 280, f"3° Bimestre: {textMedia3BimestreHistoria}")
+
+    # 4 Bimestre
+    if not isinstance(textMedia4BimestreHistoria, int):
+        pdfAluno.drawString(40, 260, f"4° Bimestre: {textMedia4BimestreHistoria.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 260, f"4° Bimestre: {textMedia4BimestreHistoria}")
+        
+    pdfAluno.drawString(40, 240, f"Média Anual: {resultadoTextMediaHistoria}")
+
+    # Inglês
+    pdfAluno.drawString(30, 210, "Inglês:")
+
+    # 1 Bimestre
+    if not isinstance(textMedia1BimestreIngles, int):
+        pdfAluno.drawString(40, 190, f"1° Bimestre: {textMedia1BimestreIngles.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 190, f"1° Bimestre: {textMedia1BimestreIngles}")
+
+    # 2 Bimestre
+    if not isinstance(textMedia2BimestreIngles, int):
+        pdfAluno.drawString(40, 170, f"2° Bimestre: {textMedia2BimestreIngles.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 170, f"2° Bimestre: {textMedia2BimestreIngles}")
+
+    # 3 Bimestre
+    if not isinstance(textMedia3BimestreIngles, int):
+        pdfAluno.drawString(40, 150, f"3° Bimestre: {textMedia3BimestreIngles.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 150, f"3° Bimestre: {textMedia3BimestreIngles}")
+
+    # 4 Bimestre
+    if not isinstance(textMedia4BimestreIngles, int):
+        pdfAluno.drawString(40, 130, f"4° Bimestre: {textMedia4BimestreIngles.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 130, f"4° Bimestre: {textMedia4BimestreIngles}")
+
+    pdfAluno.drawString(40, 110, f"Média Anual: {resultadoTextMediaIngles}")
+    pdfAluno.showPage()
+
+    # Portugues
+    pdfAluno.drawString(30, 800, "Português:")
+
+    # 1 Bimestre
+    if not isinstance(textMedia1BimestrePortugues, int):
+        pdfAluno.drawString(40, 780, f"1° Bimestre: {textMedia1BimestrePortugues.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 780, f"1° Bimestre: {textMedia1BimestrePortugues}")
+
+    # 2 Bimestre
+    if not isinstance(textMedia2BimestrePortugues, int):
+        pdfAluno.drawString(40, 760, f"2° Bimestre: {textMedia2BimestrePortugues.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 760, f"2° Bimestre: {textMedia2BimestrePortugues}")
+
+    # 3 Bimestre
+    if not isinstance(textMedia3BimestrePortugues, int):
+        pdfAluno.drawString(40, 740, f"3° Bimestre: {textMedia3BimestrePortugues.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 740, f"3° Bimestre: {textMedia3BimestrePortugues}")
+
+    # 4 Bimestre
+    if not isinstance(textMedia4BimestrePortugues, int):
+        pdfAluno.drawString(40, 720, f"4° Bimestre: {textMedia4BimestrePortugues.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 720, f"4° Bimestre: {textMedia4BimestrePortugues}")
+
+    pdfAluno.drawString(40, 700, f"Média Anual: {resultadoTextMediaPortugues}")
+    
+    # Matematica
+    pdfAluno.drawString(30, 670, "Matemática:")
+
+    # 1 Bimestre
+    if not isinstance(textMedia1BimestreMatematica, int):
+        pdfAluno.drawString(40, 650, f"1° Bimestre: {textMedia1BimestreMatematica.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 650, f"1° Bimestre: {textMedia1BimestreMatematica}")
+
+    # 2 Bimestre
+    if not isinstance(textMedia2BimestreMatematica, int):
+        pdfAluno.drawString(40, 630, f"2° Bimestre: {textMedia2BimestreMatematica.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 630, f"2° Bimestre: {textMedia2BimestreMatematica}")
+
+    # 3 Bimestre
+    if not isinstance(textMedia3BimestreMatematica, int):
+        pdfAluno.drawString(40, 610, f"3° Bimestre: {textMedia3BimestreMatematica.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 610, f"3° Bimestre: {textMedia3BimestreMatematica}")
+
+    # 4 Bimestre
+    if not isinstance(textMedia4BimestreMatematica, int):
+        pdfAluno.drawString(40, 590, f"4° Bimestre: {textMedia4BimestreMatematica.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 590, f"4° Bimestre: {textMedia4BimestreMatematica}")
+
+    pdfAluno.drawString(40, 570, f"Média Anual: {resultadoTextMediaMatematica}")
+
+    # Quimica
+    pdfAluno.drawString(30, 540, "Quimica:")
+
+    # 1 Bimestre
+    if not isinstance(textMedia1BimestreQuimica, int):
+        pdfAluno.drawString(40, 520, f"1° Bimestre: {textMedia1BimestreQuimica.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 520, f"1° Bimestre: {textMedia1BimestreQuimica}")
+
+    # 2 Bimestre
+    if not isinstance(textMedia2BimestreQuimica, int):
+        pdfAluno.drawString(40, 500, f"2° Bimestre: {textMedia2BimestreQuimica.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 500, f"2° Bimestre: {textMedia2BimestreQuimica}")
+
+    # 3 Bimestre
+    if not isinstance(textMedia3BimestreQuimica, int):
+        pdfAluno.drawString(40, 480, f"3° Bimestre: {textMedia3BimestreQuimica.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 480, f"3° Bimestre: {textMedia3BimestreQuimica}")
+
+    # 4 Bimestre
+    if not isinstance(textMedia4BimestreQuimica, int):
+        pdfAluno.drawString(40, 460, f"4° Bimestre: {textMedia4BimestreQuimica.replace(".", ",")}")
+    else:
+        pdfAluno.drawString(40, 460, f"4° Bimestre: {textMedia4BimestreQuimica}")
+
+    pdfAluno.drawString(40, 440, f"Média Anual: {resultadoTextMediaQuimica}")
+
+    # Percentual de Faltas
+    pdfAluno.drawString(40, 400, f"Percentual total de faltas no ano: {str(somaPercentualFalta)[0:4].replace(".", ",")}" + "%")
+    pdfAluno.save()
+    print("PDF das suas notas gerado com sucesso!")
 
     # Deixa o prompt 1 minuto aberto.
     time.sleep(60)
@@ -849,5 +1097,8 @@ try:
     driver.quit()
 except TimeoutException:
     time.sleep(10) # Deixa o prompt 10 segundos aberto.
-    
     print("\nFalha ao entrar na conta, login ou senha incorreta :(")
+
+
+# Dev do Projeto: Elieverton Gomes
+# Ultima Atualização: 28/05 as 13:36h
