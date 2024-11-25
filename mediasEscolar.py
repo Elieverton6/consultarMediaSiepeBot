@@ -10,11 +10,16 @@ from reportlab.lib.pagesizes import A4
 import time
 
 try:
-    # Configurações do Chrome para ativar o modo Headless
+    # Configurações do Chrome
     chrome_options = Options()
-    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--log-level=3")  # Minimiza logs do ChromeDriver
+    chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])  # Remove mensagens DevTools
+
+    # Configuração do ChromeDriver para desativar logs
     chrome_driver_path = r"c:\chromedriver\chromedriver.exe"
-    service = Service(chrome_driver_path)
+    service = Service(chrome_driver_path, log_path="NUL")  # Suprime logs do Selenium
+
+    # Inicializa o driver com as configurações
     driver = webdriver.Chrome(service=service, options=chrome_options)
 
     # Define o tamanho da janela
@@ -24,9 +29,9 @@ try:
     driver.get("https://www.siepe.educacao.pe.gov.br/")
 
     # Suas credenciais pra acessar a conta
-    print("Digite suas credenciais do SIEPE abaixo. \n")
-    login = input("Digite seu Login: ") # Seu Login
-    password = input("Digite sua Senha: ") # Sua Senha
+    print("Digite suas credenciais do SIEPE abaixo.")
+    login = input("Seu login: ") # Seu Login
+    password =  input("Sua senha: ") # Sua Senha
 
     # Espera ate que o elemento de Login esteja presente na pagina e seleciona ele
     elementLogin = WebDriverWait(driver, 5).until(
@@ -50,10 +55,18 @@ try:
     # Clica no elemento de botão
     btnEntrar.click()
 
+    elementRememberMeModalEnem = WebDriverWait(driver, 5).until(
+        EC.presence_of_element_located((By.XPATH, "/html/body/div[5]/div[2]/div[2]/div/div/a"))
+    )
+
+    # Clica no elemento de botão
+    elementRememberMeModalEnem.click()
+
     # Espera ate que o elemento PegarNomeEstudante esteja presente na pagina e seleciona ele
     elementPegarNomeEstudante = WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.XPATH, "/html/body/div[1]/header/div/div[2]/form/div/strong"))
+        EC.presence_of_element_located((By.XPATH, "/html/body/div[2]/header/div/div[2]/form/div/strong"))
     )
+
     nomeEstudanteCompleto = elementPegarNomeEstudante.text
     primeiroNomeEstudante = nomeEstudanteCompleto.split()[0] # Me retorna somente o primeiro nome.
     primeiroNomeEstudante = primeiroNomeEstudante.capitalize() # Primeira letra do nome maiuscula
@@ -62,7 +75,7 @@ try:
 
     # Espera ate que o elemento de Boletim esteja presente na pagina e seleciona ele
     elementCategoriaBoletim = WebDriverWait(driver, 20).until(
-        EC.presence_of_element_located((By.XPATH, "/html/body/div[1]/div[1]/div/div[2]/div/div/div[2]/div/form/div/a"))
+        EC.presence_of_element_located((By.XPATH, "/html/body/div[2]/div[1]/div/div[2]/div/div/div[2]/div/form/div/a"))
     )
 
     # Clica no elemento de Boletim
@@ -822,24 +835,26 @@ try:
 
     # Pegando o percentual de falta do 1º bimestre até o 4º bimestre
     elementPercentualFalta1Bi = WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/table/tbody/tr[11]/td[4]"))
+        EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/table/tbody/tr[20]/td[4]"))
     )
     elementPercentualFalta2Bi= WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/table/tbody/tr[11]/td[7]"))
+        EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/table/tbody/tr[20]/td[7]"))
     )
     elementPercentualFalta3Bi = WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/table/tbody/tr[11]/td[10]"))
+        EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/table/tbody/tr[20]/td[10]"))
     )
     elementPercentualFalta4Bi = WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/table/tbody/tr[11]/td[13]"))
+        EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/table/tbody/tr[20]/td[13]"))
     )
-    textPercentualFalta1Bi = elementPercentualFalta1Bi.text[0:3].replace(",", ".")
-    textPercentualFalta2Bi = elementPercentualFalta2Bi.text[0:3].replace(",", ".")
-    textPercentualFalta3Bi = elementPercentualFalta3Bi.text[0:3].replace(",", ".")
-    textPercentualFalta4Bi = elementPercentualFalta4Bi.text[0:3].replace(",", ".")
+    textPercentualFalta1Bi = elementPercentualFalta1Bi.text[0:5].replace(",", ".").replace("%", "")
+    textPercentualFalta2Bi = elementPercentualFalta2Bi.text[0:5].replace(",", ".").replace("%", "")
+    textPercentualFalta3Bi = elementPercentualFalta3Bi.text[0:5].replace(",", ".").replace("%", "")
+    textPercentualFalta4Bi = elementPercentualFalta4Bi.text[0:5].replace(",", ".").replace("%", "")
 
     somaPercentualFalta = float(textPercentualFalta1Bi) + float(textPercentualFalta2Bi) + float(textPercentualFalta3Bi) + float(textPercentualFalta4Bi)
-    print("Percentual Total de Faltas do ano:", str(somaPercentualFalta)[0:4] + "%")
+    # somaPercentualFalta = float(textPercentualFalta1Bi) + float(textPercentualFalta2Bi) + float(textPercentualFalta3Bi) + float(textPercentualFalta4Bi)
+    # converterPercentualFalta = float(textPercentualFalta1Bi) + float(textPercentualFalta2Bi) + float(textPercentualFalta3Bi) + float(textPercentualFalta4Bi)
+    print("Percentual Total de Faltas do ano:", str(somaPercentualFalta)[0:5] + "%")
 
     print("\n---------------------------- \n")
     print("Todas suas notas foram exibidas!")
@@ -1086,12 +1101,12 @@ try:
     pdfAluno.drawString(40, 440, f"Média Anual: {resultadoTextMediaQuimica}")
 
     # Percentual de Faltas
-    pdfAluno.drawString(40, 400, f"Percentual total de faltas no ano: {str(somaPercentualFalta)[0:4].replace(".", ",")}" + "%")
+    pdfAluno.drawString(40, 400, f"Percentual total de faltas no ano: {str(somaPercentualFalta)[0:5].replace(".", ",")}" + "%")
     pdfAluno.save()
     print("PDF das suas notas gerado com sucesso!")
 
     # Deixa o prompt 1 minuto aberto.
-    time.sleep(60)
+    time.sleep(10)
 
     # Fecha o navegador
     driver.quit()
