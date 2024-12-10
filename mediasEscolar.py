@@ -32,12 +32,17 @@ def configuration():
 def account_siepe():
     # Suas credenciais pra acessar a conta
     print("Digite suas credenciais do SIEPE abaixo.")
-    inputLogin = input("Seu Login: ") # Seu Login
-    inputPassword = input("Sua Senha: ") # Sua Senha
+    # inputLogin = input("Seu Login: ") # Seu Login
+    # inputPassword = input("Sua Senha: ") # Sua Senha
+    inputLogin = input("Login: ") # Seu Login
+    inputPassword = input("Senha: ") # Sua Senha
 
     return inputLogin, inputPassword
 
-def generating_pdf(medias, primeiroNomeEstudante, somaPercentualFalta):
+def generating_pdf(medias, primeiroNomeEstudante, somaPercentualFalta, resultado_final_biologia,
+    resultado_final_fisica, resultado_final_geografia, resultado_final_historia, resultado_final_ingles,
+    resultado_final_portugues, resultado_final_matematica, resultado_final_quimica):
+
     print("Aguarde, estamos gerando seu PDF com suas notas...")
 
     pdfAluno = canvas.Canvas(f"Medias_{primeiroNomeEstudante}.pdf", pagesize=A4)
@@ -73,213 +78,221 @@ def generating_pdf(medias, primeiroNomeEstudante, somaPercentualFalta):
         pdfAluno.drawString(40, 650, f"4° Bimestre: {medias["Biologia"]["4Bimestre"]}")
 
     pdfAluno.drawString(40, 630, f"Média Anual: {medias["Biologia"]["mediaAnual"]}")
+    pdfAluno.drawString(40, 610, f"Resultado Final: {resultado_final_biologia["resultado"]}")
 
     # Fisica
-    pdfAluno.drawString(30, 600, "Física:")
+    pdfAluno.drawString(30, 580, "Física:")
 
     # 1 Bimestre
     if not isinstance(medias["Fisica"]["1Bimestre"], int):
-        pdfAluno.drawString(40, 580, f"1° Bimestre: {medias["Fisica"]["1Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 560, f"1° Bimestre: {medias["Fisica"]["1Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 580, f"1° Bimestre: {medias["Fisica"]["1Bimestre"]}")
+        pdfAluno.drawString(40, 560, f"1° Bimestre: {medias["Fisica"]["1Bimestre"]}")
 
     # 2 Bimestre
     if not isinstance(medias["Fisica"]["2Bimestre"], int):
-        pdfAluno.drawString(40, 560, f"2° Bimestre: {medias["Fisica"]["2Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 540, f"2° Bimestre: {medias["Fisica"]["2Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 560, f"2° Bimestre: {medias["Fisica"]["2Bimestre"]}")
+        pdfAluno.drawString(40, 540, f"2° Bimestre: {medias["Fisica"]["2Bimestre"]}")
 
     # 3 Bimestre
     if not isinstance(medias["Fisica"]["3Bimestre"], int):
-        pdfAluno.drawString(40, 540, f"3° Bimestre: {medias["Fisica"]["3Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 520, f"3° Bimestre: {medias["Fisica"]["3Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 540, f"3° Bimestre: {medias["Fisica"]["3Bimestre"]}")
+        pdfAluno.drawString(40, 520, f"3° Bimestre: {medias["Fisica"]["3Bimestre"]}")
 
     # 4 Bimestre
     if not isinstance(medias["Fisica"]["4Bimestre"], int):
-        pdfAluno.drawString(40, 520, f"4° Bimestre: {medias["Fisica"]["4Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 500, f"4° Bimestre: {medias["Fisica"]["4Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 520, f"4° Bimestre: {medias["Fisica"]["4Bimestre"]}")
+        pdfAluno.drawString(40, 500, f"4° Bimestre: {medias["Fisica"]["4Bimestre"]}")
         
-    pdfAluno.drawString(40, 500, f"Média Anual: {medias["Fisica"]["mediaAnual"]}")
+    pdfAluno.drawString(40, 480, f"Média Anual: {medias["Fisica"]["mediaAnual"]}")
+    pdfAluno.drawString(40, 460, f"Resultado Final: {resultado_final_fisica["resultado"]}")
 
     # Geografia
-    pdfAluno.drawString(30, 470, "Geografia:")
+    pdfAluno.drawString(30, 430, "Geografia:")
 
     # 1 Bimestre
     if not isinstance(medias["Geografia"]["1Bimestre"], int):
-        pdfAluno.drawString(40, 450, f"1° Bimestre: {medias["Geografia"]["1Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 410, f"1° Bimestre: {medias["Geografia"]["1Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 450, f"1° Bimestre: {medias["Geografia"]["1Bimestre"]}")
+        pdfAluno.drawString(40, 410, f"1° Bimestre: {medias["Geografia"]["1Bimestre"]}")
 
     # 2 Bimestre
     if not isinstance(medias["Geografia"]["2Bimestre"], int):
-        pdfAluno.drawString(40, 430, f"1° Bimestre: {medias["Geografia"]["2Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 390, f"2° Bimestre: {medias["Geografia"]["2Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 430, f"1° Bimestre: {medias["Geografia"]["2Bimestre"]}")
+        pdfAluno.drawString(40, 390, f"2° Bimestre: {medias["Geografia"]["2Bimestre"]}")
 
     # 3 Bimestre
     if not isinstance(medias["Geografia"]["3Bimestre"], int):
-        pdfAluno.drawString(40, 410, f"1° Bimestre: {medias["Geografia"]["3Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 370, f"3° Bimestre: {medias["Geografia"]["3Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 410, f"1° Bimestre: {medias["Geografia"]["3Bimestre"]}")
+        pdfAluno.drawString(40, 370, f"3° Bimestre: {medias["Geografia"]["3Bimestre"]}")
 
     # 4 Bimestre
     if not isinstance(medias["Geografia"]["4Bimestre"], int):
-        pdfAluno.drawString(40, 390, f"1° Bimestre: {medias["Geografia"]["4Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 350, f"4° Bimestre: {medias["Geografia"]["4Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 390, f"1° Bimestre: {medias["Geografia"]["4Bimestre"]}")
+        pdfAluno.drawString(40, 350, f"4° Bimestre: {medias["Geografia"]["4Bimestre"]}")
 
-    pdfAluno.drawString(40, 370, f"Média Anual: {medias["Geografia"]["mediaAnual"]}")
+    pdfAluno.drawString(40, 330, f"Média Anual: {medias["Geografia"]["mediaAnual"]}")
+    pdfAluno.drawString(40, 310, f"Resultado Final: {resultado_final_geografia["resultado"]}")
 
     # Historia
-    pdfAluno.drawString(30, 340, "História:")
+    pdfAluno.drawString(30, 280, "História:")
 
     # 1 Bimestre
     if not isinstance(medias["Historia"]["1Bimestre"], int):
-        pdfAluno.drawString(40, 320, f"1° Bimestre: {medias["Historia"]["1Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 260, f"1° Bimestre: {medias["Historia"]["1Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 320, f"1° Bimestre: {medias["Historia"]["1Bimestre"]}")
+        pdfAluno.drawString(40, 260, f"1° Bimestre: {medias["Historia"]["1Bimestre"]}")
 
     # 2 Bimestre
     if not isinstance(medias["Historia"]["2Bimestre"], int):
-        pdfAluno.drawString(40, 300, f"2° Bimestre: {medias["Historia"]["2Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 240, f"2° Bimestre: {medias["Historia"]["2Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 300, f"2° Bimestre: {medias["Historia"]["2Bimestre"]}")
+        pdfAluno.drawString(40, 240, f"2° Bimestre: {medias["Historia"]["2Bimestre"]}")
 
     # 3 Bimestre
     if not isinstance(medias["Historia"]["3Bimestre"], int):
-        pdfAluno.drawString(40, 280, f"3° Bimestre: {medias["Historia"]["3Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 220, f"3° Bimestre: {medias["Historia"]["3Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 280, f"3° Bimestre: {medias["Historia"]["3Bimestre"]}")
+        pdfAluno.drawString(40, 220, f"3° Bimestre: {medias["Historia"]["3Bimestre"]}")
 
     # 4 Bimestre
     if not isinstance(medias["Historia"]["4Bimestre"], int):
-        pdfAluno.drawString(40, 260, f"4° Bimestre: {medias["Historia"]["4Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 200, f"4° Bimestre: {medias["Historia"]["4Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 260, f"4° Bimestre: {medias["Historia"]["4Bimestre"]}")
+        pdfAluno.drawString(40, 200, f"4° Bimestre: {medias["Historia"]["4Bimestre"]}")
         
-    pdfAluno.drawString(40, 240, f"Média Anual: {medias["Historia"]["mediaAnual"]}")
+    pdfAluno.drawString(40, 180, f"Média Anual: {medias["Historia"]["mediaAnual"]}")
+    pdfAluno.drawString(40, 160, f"Resultado Final: {resultado_final_historia["resultado"]}")
 
     # Inglês
-    pdfAluno.drawString(30, 210, "Inglês:")
+    pdfAluno.drawString(30, 130, "Inglês:")
 
     # 1 Bimestre
     if not isinstance(medias["Ingles"]["1Bimestre"], int):
-        pdfAluno.drawString(40, 190, f"1° Bimestre: {medias["Ingles"]["1Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 110, f"1° Bimestre: {medias["Ingles"]["1Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 190, f"1° Bimestre: {medias["Ingles"]["1Bimestre"]}")
+        pdfAluno.drawString(40, 110, f"1° Bimestre: {medias["Ingles"]["1Bimestre"]}")
 
     # 2 Bimestre
     if not isinstance(medias["Ingles"]["2Bimestre"], int):
-        pdfAluno.drawString(40, 170, f"2° Bimestre: {medias["Ingles"]["2Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 90, f"2° Bimestre: {medias["Ingles"]["2Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 170, f"2° Bimestre: {medias["Ingles"]["2Bimestre"]}")
+        pdfAluno.drawString(40, 90, f"2° Bimestre: {medias["Ingles"]["2Bimestre"]}")
 
     # 3 Bimestre
     if not isinstance(medias["Ingles"]["3Bimestre"], int):
-        pdfAluno.drawString(40, 150, f"3° Bimestre: {medias["Ingles"]["3Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 70, f"3° Bimestre: {medias["Ingles"]["3Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 150, f"3° Bimestre: {medias["Ingles"]["3Bimestre"]}")
+        pdfAluno.drawString(40, 70, f"3° Bimestre: {medias["Ingles"]["3Bimestre"]}")
 
     # 4 Bimestre
     if not isinstance(medias["Ingles"]["4Bimestre"], int):
-        pdfAluno.drawString(40, 130, f"4° Bimestre: {medias["Ingles"]["4Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 50, f"4° Bimestre: {medias["Ingles"]["4Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 130, f"4° Bimestre: {medias["Ingles"]["4Bimestre"]}")
+        pdfAluno.drawString(40, 50, f"4° Bimestre: {medias["Ingles"]["4Bimestre"]}")
 
-    pdfAluno.drawString(40, 110, f"Média Anual: {medias["Ingles"]["mediaAnual"]}")
     pdfAluno.showPage()
+    pdfAluno.drawString(40, 800, f"Média Anual: {medias["Ingles"]["mediaAnual"]}")
+    pdfAluno.drawString(40, 780, f"Resultado Final: {resultado_final_historia["resultado"]}")
 
-    # Portugues
-    pdfAluno.drawString(30, 800, "Português:")
+    # # Portugues
+    pdfAluno.drawString(30, 750, "Português:")
 
     # 1 Bimestre
     if not isinstance(medias["Portugues"]["1Bimestre"], int):
-        pdfAluno.drawString(40, 780, f"1° Bimestre: {medias["Portugues"]["1Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 730, f"1° Bimestre: {medias["Portugues"]["1Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 780, f"1° Bimestre: {medias["Portugues"]["1Bimestre"]}")
+        pdfAluno.drawString(40, 730, f"1° Bimestre: {medias["Portugues"]["1Bimestre"]}")
 
     # 2 Bimestre
     if not isinstance(medias["Portugues"]["2Bimestre"], int):
-        pdfAluno.drawString(40, 760, f"2° Bimestre: {medias["Portugues"]["2Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 710, f"2° Bimestre: {medias["Portugues"]["2Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 760, f"2° Bimestre: {medias["Portugues"]["2Bimestre"]}")
+        pdfAluno.drawString(40, 710, f"2° Bimestre: {medias["Portugues"]["2Bimestre"]}")
 
     # 3 Bimestre
     if not isinstance(medias["Portugues"]["3Bimestre"], int):
-        pdfAluno.drawString(40, 740, f"3° Bimestre: {medias["Portugues"]["3Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 690, f"3° Bimestre: {medias["Portugues"]["3Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 740, f"3° Bimestre: {medias["Portugues"]["3Bimestre"]}")
+        pdfAluno.drawString(40, 690, f"3° Bimestre: {medias["Portugues"]["3Bimestre"]}")
 
     # 4 Bimestre
     if not isinstance(medias["Portugues"]["4Bimestre"], int):
-        pdfAluno.drawString(40, 720, f"4° Bimestre: {medias["Portugues"]["4Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 670, f"4° Bimestre: {medias["Portugues"]["4Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 720, f"4° Bimestre: {medias["Portugues"]["4Bimestre"]}")
+        pdfAluno.drawString(40, 670, f"4° Bimestre: {medias["Portugues"]["4Bimestre"]}")
 
-    pdfAluno.drawString(40, 700, f"Média Anual: {medias["Portugues"]["mediaAnual"]}")
+    pdfAluno.drawString(40, 650, f"Média Anual: {medias["Portugues"]["mediaAnual"]}")
+    pdfAluno.drawString(40, 630, f"Resultado Final: {resultado_final_portugues["resultado"]}")
     
     # Matematica
-    pdfAluno.drawString(30, 670, "Matemática:")
+    pdfAluno.drawString(30, 600, "Matemática:")
 
     # 1 Bimestre
     if not isinstance(medias["Matematica"]["1Bimestre"], int):
-        pdfAluno.drawString(40, 650, f"1° Bimestre: {medias["Matematica"]["1Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 580, f"1° Bimestre: {medias["Matematica"]["1Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 650, f"1° Bimestre: {medias["Matematica"]["1Bimestre"]}")
+        pdfAluno.drawString(40, 580, f"1° Bimestre: {medias["Matematica"]["1Bimestre"]}")
 
     # 2 Bimestre
     if not isinstance(medias["Matematica"]["2Bimestre"], int):
-        pdfAluno.drawString(40, 630, f"2° Bimestre: {medias["Matematica"]["2Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 560, f"2° Bimestre: {medias["Matematica"]["2Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 630, f"2° Bimestre: {medias["Matematica"]["2Bimestre"]}")
+        pdfAluno.drawString(40, 560, f"2° Bimestre: {medias["Matematica"]["2Bimestre"]}")
 
     # 3 Bimestre
     if not isinstance(medias["Matematica"]["3Bimestre"], int):
-        pdfAluno.drawString(40, 610, f"3° Bimestre: {medias["Matematica"]["3Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 540, f"3° Bimestre: {medias["Matematica"]["3Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 610, f"3° Bimestre: {medias["Matematica"]["3Bimestre"]}")
+        pdfAluno.drawString(40, 540, f"3° Bimestre: {medias["Matematica"]["3Bimestre"]}")
 
     # 4 Bimestre
     if not isinstance(medias["Matematica"]["4Bimestre"], int):
-        pdfAluno.drawString(40, 590, f"4° Bimestre: {medias["Matematica"]["4Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 520, f"4° Bimestre: {medias["Matematica"]["4Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 590, f"4° Bimestre: {medias["Matematica"]["4Bimestre"]}")
+        pdfAluno.drawString(40, 520, f"4° Bimestre: {medias["Matematica"]["4Bimestre"]}")
 
-    pdfAluno.drawString(40, 570, f"Média Anual: {medias["Matematica"]["mediaAnual"]}")
+    pdfAluno.drawString(40, 500, f"Média Anual: {medias["Matematica"]["mediaAnual"]}")
+    pdfAluno.drawString(40, 480, f"Resultado Final: {resultado_final_matematica["resultado"]}")
 
     # Quimica
-    pdfAluno.drawString(30, 540, "Quimica:")
+    pdfAluno.drawString(30, 450, "Quimica:")
 
     # 1 Bimestre
     if not isinstance(medias["Quimica"]["1Bimestre"], int):
-        pdfAluno.drawString(40, 520, f"1° Bimestre: {medias["Quimica"]["1Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 430, f"1° Bimestre: {medias["Quimica"]["1Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 520, f"1° Bimestre: {medias["Quimica"]["1Bimestre"]}")
+        pdfAluno.drawString(40, 430, f"1° Bimestre: {medias["Quimica"]["1Bimestre"]}")
 
     # 2 Bimestre
     if not isinstance(medias["Quimica"]["2Bimestre"], int):
-        pdfAluno.drawString(40, 500, f"2° Bimestre: {medias["Quimica"]["2Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 410, f"2° Bimestre: {medias["Quimica"]["2Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 500, f"2° Bimestre: {medias["Quimica"]["2Bimestre"]}")
+        pdfAluno.drawString(40, 410, f"2° Bimestre: {medias["Quimica"]["2Bimestre"]}")
 
     # 3 Bimestre
     if not isinstance(medias["Quimica"]["3Bimestre"], int):
-        pdfAluno.drawString(40, 480, f"3° Bimestre: {medias["Quimica"]["3Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 390, f"3° Bimestre: {medias["Quimica"]["3Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 480, f"3° Bimestre: {medias["Quimica"]["3Bimestre"]}")
+        pdfAluno.drawString(40, 390, f"3° Bimestre: {medias["Quimica"]["3Bimestre"]}")
 
     # 4 Bimestre
     if not isinstance(medias["Quimica"]["4Bimestre"], int):
-        pdfAluno.drawString(40, 460, f"4° Bimestre: {medias["Quimica"]["4Bimestre"].replace(".", ",")}")
+        pdfAluno.drawString(40, 370, f"4° Bimestre: {medias["Quimica"]["4Bimestre"].replace(".", ",")}")
     else:
-        pdfAluno.drawString(40, 460, f"4° Bimestre: {medias["Quimica"]["4Bimestre"]}")
+        pdfAluno.drawString(40, 370, f"4° Bimestre: {medias["Quimica"]["4Bimestre"]}")
 
-    pdfAluno.drawString(40, 440, f"Média Anual: {medias["Quimica"]["mediaAnual"]}")
+    pdfAluno.drawString(40, 350, f"Média Anual: {medias["Quimica"]["mediaAnual"]}")
+    pdfAluno.drawString(40, 330, f"Resultado Final: {resultado_final_quimica["resultado"]}")
 
     # Percentual de Faltas
-    pdfAluno.drawString(40, 400, f"Percentual total de faltas no ano: {str(somaPercentualFalta)[0:5].replace(".", ",")}" + "%")
+    pdfAluno.drawString(40, 300, f"Percentual total de faltas no ano: {str(somaPercentualFalta)[0:5].replace(".", ",")}" + "%")
     pdfAluno.save()
     print("PDF das suas notas gerado com sucesso!")
 
@@ -378,19 +391,22 @@ def structure():
         textMedia2BimestreBiologia = elementMedia2BimestreBiologia.text
         textMedia3BimestreBiologia = elementMedia3BimestreBiologia.text
         textMedia4BimestreBiologia = elementMedia4BimestreBiologia.text
+        notMedia4BimestreBiologia = False
 
-        print("Nota 1 Bimestre de Biologia: ", textMedia1BimestreBiologia)
+        print("Matéria: Biologia")
+        print("1º Bimestre:", textMedia1BimestreBiologia)
         if (textMedia1BimestreBiologia == "-"):
             textMedia1BimestreBiologia = 0
-        print("Nota 2 Bimestre de Biologia: ", textMedia2BimestreBiologia)
+        print("2º Bimestre:", textMedia2BimestreBiologia)
         if (textMedia2BimestreBiologia == "-"):
             textMedia2BimestreBiologia = 0
-        print("Nota 3 Bimestre de Biologia: ", textMedia3BimestreBiologia)
+        print("3º Bimestre:", textMedia3BimestreBiologia)
         if (textMedia3BimestreBiologia == "-"):
             textMedia3BimestreBiologia = 0
-        print("Nota 4 Bimestre de Biologia: ", textMedia4BimestreBiologia)
+        print("4º Bimestre:", textMedia4BimestreBiologia)
         if (textMedia4BimestreBiologia == "-"):
             textMedia4BimestreBiologia = 0
+            notMedia4BimestreFisica = True
 
         if not isinstance(textMedia1BimestreBiologia, int):
             textMedia1BimestreBiologia = textMedia1BimestreBiologia.replace(",", ".")
@@ -442,13 +458,50 @@ def structure():
             textMediaBiologia = 8.5
         elif (textMediaBiologia >= 8.6 and textMediaBiologia <= 8.9):
             textMediaBiologia = 9.0
-        elif (textMediaBiologia >= 9.1 and textMediaBiologia <= 6.4):
+        elif (textMediaBiologia >= 9.1 and textMediaBiologia <= 9.4):
             textMediaBiologia = 9.5
         elif (textMediaBiologia >= 9.6 and textMediaBiologia <= 9.9):
             textMediaBiologia = 10.0
 
         resultadoTextMediaBiologia = str(textMediaBiologia).replace(".", ",")
-        print("Média em Biologia: ", resultadoTextMediaBiologia[0:3])
+        print("Média:", resultadoTextMediaBiologia[0:4])
+
+        resultadoAprovacaoTextMediaBiologia = float(resultadoTextMediaBiologia.replace(",", "."))
+
+        resultado_final_biologia = {}
+
+        if (notMedia4BimestreBiologia is True) and (resultadoAprovacaoTextMediaBiologia < 6.0):
+            resultado_final = "Falta nota para conclusão."
+            print(f"Resultado Final: {resultado_final} 😬")
+
+            resultado_final_biologia = {
+                "nota_faltando": True,
+                "resultado": resultado_final
+            }
+        elif (notMedia4BimestreBiologia is True) and (resultadoAprovacaoTextMediaBiologia >= 6.0):
+            resultado_final = "Aprovado com antecedência!"
+            print(f"Resultado Final: {resultado_final} 🥳")
+
+            resultado_final_biologia = {
+                "nota_faltando": False,
+                "resultado": resultado_final
+            }
+        elif (resultadoAprovacaoTextMediaBiologia >= 6.0):
+            resultado_final = "Aprovado!"
+            print(f"Resultado Final: {resultado_final} 🥳")
+
+            resultado_final_biologia = {
+                "nota_faltando": False,
+                "resultado": resultado_final
+            }
+        else:
+            resultado_final = "Recuperação!"
+            print(f"Resultado Final: {resultado_final} 😓")
+
+            resultado_final_biologia = {
+                "nota_faltando": False,
+                "resultado": resultado_final
+            }
 
         print("\n----------------------------\n")
 
@@ -469,19 +522,22 @@ def structure():
         textMedia2BimestreFisica = elementMedia2BimestreFisica.text
         textMedia3BimestreFisica = elementMedia3BimestreFisica.text
         textMedia4BimestreFisica = elementMedia4BimestreFisica.text
+        notMedia4BimestreFisica = False
 
-        print("Nota 1 Bimestre de Fisica: ", textMedia1BimestreFisica)
+        print("Matéria: Fisica")
+        print("1º Bimestre:", textMedia1BimestreFisica)
         if (textMedia1BimestreFisica == "-"):
             textMedia1BimestreFisica = 0
-        print("Nota 2 Bimestre de Fisica: ", textMedia2BimestreFisica)
+        print("2º Bimestre:", textMedia2BimestreFisica)
         if (textMedia2BimestreFisica == "-"):
             textMedia2BimestreFisica = 0
-        print("Nota 3 Bimestre de Fisica: ", textMedia3BimestreFisica)
+        print("3º Bimestre:", textMedia3BimestreFisica)
         if (textMedia3BimestreFisica == "-"):
             textMedia3BimestreFisica = 0
-        print("Nota 4 Bimestre de Fisica: ", textMedia4BimestreFisica)
+        print("4º Bimestre:", textMedia4BimestreFisica)
         if (textMedia4BimestreFisica == "-"):
             textMedia4BimestreFisica = 0
+            notMedia4BimestreFisica = True
 
         if not isinstance(textMedia1BimestreFisica, int):
             textMedia1BimestreFisica = textMedia1BimestreFisica.replace(",", ".")
@@ -533,13 +589,49 @@ def structure():
             textMediaFisica = 8.5
         elif (textMediaFisica >= 8.6 and textMediaFisica <= 8.9):
             textMediaFisica = 9.0
-        elif (textMediaFisica >= 9.1 and textMediaFisica <= 6.4):
+        elif (textMediaFisica >= 9.1 and textMediaFisica <= 9.4):
             textMediaFisica = 9.5
         elif (textMediaFisica >= 9.6 and textMediaFisica <= 9.9):
             textMediaFisica = 10.0
 
         resultadoTextMediaFisica = str(textMediaFisica).replace(".", ",")
-        print("Média em Fisica: ", resultadoTextMediaFisica[0:3])
+        print("Média:", resultadoTextMediaFisica[0:4])
+
+        resultadoAprovacaoTextMediaFisica = float(resultadoTextMediaFisica.replace(",", "."))
+        resultado_final_fisica = {}
+
+        if (notMedia4BimestreFisica is True) and (resultadoAprovacaoTextMediaFisica < 6.0):
+            resultado_final = "Falta nota para conclusão."
+            print(f"Resultado Final: {resultado_final} 😬")
+
+            resultado_final_fisica = {
+                "nota_faltando": True,
+                "resultado": resultado_final
+            }
+        elif (notMedia4BimestreFisica is True) and (resultadoAprovacaoTextMediaFisica >= 6.0):
+            resultado_final = "Aprovado com antecedência!"
+            print(f"Resultado Final: {resultado_final} 🥳")
+
+            resultado_final_fisica = {
+                "nota_faltando": False,
+                "resultado": resultado_final
+            }
+        elif (resultadoAprovacaoTextMediaFisica >= 6.0):
+            resultado_final = "Aprovado!"
+            print(f"Resultado Final: {resultado_final} 🥳")
+
+            resultado_final_fisica = {
+                "nota_faltando": False,
+                "resultado": resultado_final
+            }
+        else:
+            resultado_final = "Recuperação!"
+            print(f"Resultado Final: {resultado_final} 😓")
+
+            resultado_final_fisica = {
+                "nota_faltando": False,
+                "resultado": resultado_final
+            }
 
         print("\n---------------------------- \n")
 
@@ -560,19 +652,22 @@ def structure():
         textMedia2BimestreGeografia = elementMedia2BimestreGeografia.text
         textMedia3BimestreGeografia = elementMedia3BimestreGeografia.text
         textMedia4BimestreGeografia = elementMedia4BimestreGeografia.text
+        notMedia4BimestreGeografia = False
 
-        print("Nota 1 Bimestre de Geografia: ", textMedia1BimestreGeografia)
+        print("Matéria: Geografia")
+        print("1º Bimestre:", textMedia1BimestreGeografia)
         if (textMedia1BimestreGeografia == "-"):
             textMedia1BimestreGeografia = 0
-        print("Nota 2 Bimestre de Geografia: ", textMedia2BimestreGeografia)
+        print("2º Bimestre:", textMedia2BimestreGeografia)
         if (textMedia2BimestreGeografia == "-"):
             textMedia2BimestreGeografia = 0
-        print("Nota 3 Bimestre de Geografia: ", textMedia3BimestreGeografia)
+        print("3º Bimestre:", textMedia3BimestreGeografia)
         if (textMedia3BimestreGeografia == "-"):
             textMedia3BimestreGeografia = 0
-        print("Nota 4 Bimestre de Geografia: ", textMedia4BimestreGeografia)
+        print("4º Bimestre:", textMedia4BimestreGeografia)
         if (textMedia4BimestreGeografia == "-"):
             textMedia4BimestreGeografia = 0
+            notMedia4BimestreGeografia = True
 
         if not isinstance(textMedia1BimestreGeografia, int):
             textMedia1BimestreGeografia = textMedia1BimestreGeografia.replace(",", ".")
@@ -624,13 +719,49 @@ def structure():
             textMediaGeografia = 8.5
         elif (textMediaGeografia >= 8.6 and textMediaGeografia <= 8.9):
             textMediaGeografia = 9.0
-        elif (textMediaGeografia >= 9.1 and textMediaGeografia <= 6.4):
+        elif (textMediaGeografia >= 9.1 and textMediaGeografia <= 9.4):
             textMediaGeografia = 9.5
         elif (textMediaGeografia >= 9.6 and textMediaGeografia <= 9.9):
             textMediaGeografia = 10.0
     
         resultadoTextMediaGeografia = str(textMediaGeografia).replace(".", ",")
-        print("Média em Geografia: ", resultadoTextMediaGeografia[0:3])
+        print("Média:", resultadoTextMediaGeografia[0:4])
+
+        resultadoAprovacaoTextMediaGeografia = float(resultadoTextMediaGeografia.replace(",", "."))
+        resultado_final_geografia = {}
+
+        if (notMedia4BimestreGeografia is True) and (resultadoAprovacaoTextMediaGeografia < 6.0):
+            resultado_final = "Falta nota para conclusão."
+            print(f"Resultado Final: {resultado_final} 😬")
+
+            resultado_final_geografia = {
+                "nota_faltando": True,
+                "resultado": resultado_final
+            }
+        elif (notMedia4BimestreGeografia is True) and (resultadoAprovacaoTextMediaGeografia >= 6.0):
+            resultado_final = "Aprovado com antecedência!"
+            print(f"Resultado Final: {resultado_final} 🥳")
+
+            resultado_final_geografia = {
+                "nota_faltando": False,
+                "resultado": resultado_final
+            }
+        elif (resultadoAprovacaoTextMediaGeografia >= 6.0):
+            resultado_final = "Aprovado!"
+            print(f"Resultado Final: {resultado_final} 🥳")
+
+            resultado_final_geografia = {
+                "nota_faltando": False,
+                "resultado": resultado_final
+            }
+        else:
+            resultado_final = "Recuperação!"
+            print(f"Resultado Final: {resultado_final} 😓")
+
+            resultado_final_geografia = {
+                "nota_faltando": False,
+                "resultado": resultado_final
+            }
 
         print("\n---------------------------- \n")
 
@@ -651,19 +782,22 @@ def structure():
         textMedia2BimestreHistoria = elementMedia2BimestreHistoria.text
         textMedia3BimestreHistoria = elementMedia3BimestreHistoria.text
         textMedia4BimestreHistoria = elementMedia4BimestreHistoria.text
+        notMedia4BimestreHistoria = False
 
-        print("Nota 1 Bimestre de Historia: ", textMedia1BimestreHistoria)
+        print("Máteria: História")
+        print("1º Bimestre:", textMedia1BimestreHistoria)
         if (textMedia1BimestreHistoria == "-"):
             textMedia1BimestreHistoria = 0
-        print("Nota 2 Bimestre de Historia: ", textMedia2BimestreHistoria)
+        print("2º Bimestre:", textMedia2BimestreHistoria)
         if (textMedia2BimestreHistoria == "-"):
             textMedia2BimestreHistoria = 0
-        print("Nota 3 Bimestre de Historia: ", textMedia3BimestreHistoria)
+        print("3º Bimestre:", textMedia3BimestreHistoria)
         if (textMedia3BimestreHistoria == "-"):
             textMedia3BimestreHistoria = 0
-        print("Nota 4 Bimestre de Historia: ", textMedia4BimestreHistoria)
+        print("4º Bimestre:", textMedia4BimestreHistoria)
         if (textMedia4BimestreHistoria == "-"):
             textMedia4BimestreHistoria = 0
+            notMedia4BimestreHistoria = True
 
         if not isinstance(textMedia1BimestreHistoria, int):
             textMedia1BimestreHistoria = textMedia1BimestreHistoria.replace(",", ".")
@@ -715,13 +849,49 @@ def structure():
             textMediaHistoria = 8.5
         elif (textMediaHistoria >= 8.6 and textMediaHistoria <= 8.9):
             textMediaHistoria = 9.0
-        elif (textMediaHistoria >= 9.1 and textMediaHistoria <= 6.4):
+        elif (textMediaHistoria >= 9.1 and textMediaHistoria <= 9.4):
             textMediaHistoria = 9.5
         elif (textMediaHistoria >= 9.6 and textMediaHistoria <= 9.9):
             textMediaHistoria = 10.0
 
         resultadoTextMediaHistoria = str(textMediaHistoria).replace(".", ",")
-        print("Média em Historia: ", resultadoTextMediaHistoria[0:3])
+        print("Média:", resultadoTextMediaHistoria[0:4])
+
+        resultadoAprovacaoTextMediaHistoria = float(resultadoTextMediaHistoria.replace(",", "."))
+        resultado_final_historia = {}
+
+        if (notMedia4BimestreHistoria is True) and (resultadoAprovacaoTextMediaHistoria < 6.0):
+            resultado_final = "Falta nota para conclusão."
+            print(f"Resultado Final: {resultado_final} 😬")
+
+            resultado_final_historia = {
+                "nota_faltando": True,
+                "resultado": resultado_final
+            }
+        elif (notMedia4BimestreHistoria is True) and (resultadoAprovacaoTextMediaHistoria >= 6.0):
+            resultado_final = "Aprovado com antecedência!"
+            print(f"Resultado Final: {resultado_final} 🥳")
+
+            resultado_final_historia = {
+                "nota_faltando": False,
+                "resultado": resultado_final
+            }
+        elif (resultadoAprovacaoTextMediaHistoria >= 6.0):
+            resultado_final = "Aprovado!"
+            print(f"Resultado Final: {resultado_final} 🥳")
+
+            resultado_final_historia = {
+                "nota_faltando": False,
+                "resultado": resultado_final
+            }
+        else:
+            resultado_final = "Recuperação!"
+            print(f"Resultado Final: {resultado_final} 😓")
+
+            resultado_final_historia = {
+                "nota_faltando": False,
+                "resultado": resultado_final
+            }
 
         print("\n---------------------------- \n")
 
@@ -742,19 +912,22 @@ def structure():
         textMedia2BimestreIngles = elementMedia2BimestreIngles.text
         textMedia3BimestreIngles = elementMedia3BimestreIngles.text
         textMedia4BimestreIngles = elementMedia4BimestreIngles.text
+        notMedia4BimestreIngles = False
 
-        print("Nota 1 Bimestre de Ingles: ", textMedia1BimestreIngles)
+        print("Matéria: Inglês")
+        print("1º Bimestre:", textMedia1BimestreIngles)
         if (textMedia1BimestreIngles == "-"):
             textMedia1BimestreIngles = 0
-        print("Nota 2 Bimestre de Ingles: ", textMedia2BimestreIngles)
+        print("2º Bimestre:", textMedia2BimestreIngles)
         if (textMedia2BimestreIngles == "-"):
             textMedia2BimestreIngles = 0
-        print("Nota 3 Bimestre de Ingles: ", textMedia3BimestreIngles)
+        print("3º Bimestre:", textMedia3BimestreIngles)
         if (textMedia3BimestreIngles == "-"):
             textMedia3BimestreIngles = 0
-        print("Nota 4 Bimestre de Ingles: ", textMedia4BimestreIngles)
+        print("4º Bimestre:", textMedia4BimestreIngles)
         if (textMedia4BimestreIngles == "-"):
             textMedia4BimestreIngles = 0
+            notMedia4BimestreIngles = True
 
         if not isinstance(textMedia1BimestreIngles, int):
             textMedia1BimestreIngles = textMedia1BimestreIngles.replace(",", ".")
@@ -806,13 +979,49 @@ def structure():
             textMediaIngles = 8.5
         elif (textMediaIngles >= 8.6 and textMediaIngles <= 8.9):
             textMediaIngles = 9.0
-        elif (textMediaIngles >= 9.1 and textMediaIngles <= 6.4):
+        elif (textMediaIngles >= 9.1 and textMediaIngles <= 9.4):
             textMediaIngles = 9.5
         elif (textMediaIngles >= 9.6 and textMediaIngles <= 9.9):
             textMediaIngles = 10.0
         
         resultadoTextMediaIngles = str(textMediaIngles).replace(".", ",")
-        print("Média em Ingles: ", resultadoTextMediaIngles[0:3])
+        print("Média:", resultadoTextMediaIngles[0:4])
+
+        resultadoAprovacaoTextMediaIngles = float(resultadoTextMediaIngles.replace(",", "."))
+        resultado_final_ingles = {}
+
+        if (notMedia4BimestreIngles is True) and (resultadoAprovacaoTextMediaIngles < 6.0):
+            resultado_final = "Falta nota para conclusão."
+            print(f"Resultado Final: {resultado_final} 😬")
+
+            resultado_final_ingles = {
+                "nota_faltando": True,
+                "resultado": resultado_final
+            }
+        elif (notMedia4BimestreIngles is True) and (resultadoAprovacaoTextMediaIngles >= 6.0):
+            resultado_final = "Aprovado com antecedência!"
+            print(f"Resultado Final: {resultado_final} 🥳")
+
+            resultado_final_ingles = {
+                "nota_faltando": False,
+                "resultado": resultado_final
+            }
+        elif (resultadoAprovacaoTextMediaIngles >= 6.0):
+            resultado_final = "Aprovado!"
+            print(f"Resultado Final: {resultado_final} 🥳")
+
+            resultado_final_ingles = {
+                "nota_faltando": False,
+                "resultado": resultado_final
+            }
+        else:
+            resultado_final = "Recuperação!"
+            print(f"Resultado Final: {resultado_final} 😓")
+
+            resultado_final_ingles = {
+                "nota_faltando": False,
+                "resultado": resultado_final
+            }
 
         print("\n---------------------------- \n")
 
@@ -833,19 +1042,22 @@ def structure():
         textMedia2BimestrePortugues = elementMedia2BimestrePortugues.text
         textMedia3BimestrePortugues = elementMedia3BimestrePortugues.text
         textMedia4BimestrePortugues = elementMedia4BimestrePortugues.text
+        notMedia4BimestrePortugues = False
 
-        print("Nota 1 Bimestre de Portugues: ", textMedia1BimestrePortugues)
+        print("Matéria: Português")
+        print("1º Bimestre:", textMedia1BimestrePortugues)
         if (textMedia1BimestrePortugues == "-"):
             textMedia1BimestrePortugues = 0
-        print("Nota 2 Bimestre de Portugues: ", textMedia2BimestrePortugues)
+        print("2º Bimestre:", textMedia2BimestrePortugues)
         if (textMedia2BimestrePortugues == "-"):
             textMedia2BimestrePortugues = 0
-        print("Nota 3 Bimestre de Portugues: ", textMedia3BimestrePortugues)
+        print("3º Bimestre:", textMedia3BimestrePortugues)
         if (textMedia3BimestrePortugues == "-"):
             textMedia3BimestrePortugues = 0
-        print("Nota 4 Bimestre de Portugues: ", textMedia4BimestrePortugues)
+        print("4º Bimestre:", textMedia4BimestrePortugues)
         if (textMedia4BimestrePortugues == "-"):
             textMedia4BimestrePortugues = 0
+            notMedia4BimestrePortugues = True
 
         if not isinstance(textMedia1BimestrePortugues, int):
             textMedia1BimestrePortugues = textMedia1BimestrePortugues.replace(",", ".")
@@ -897,16 +1109,52 @@ def structure():
             textMediaPortugues = 8.5
         elif (textMediaPortugues >= 8.6 and textMediaPortugues <= 8.9):
             textMediaPortugues = 9.0
-        elif (textMediaPortugues >= 9.1 and textMediaPortugues <= 6.4):
+        elif (textMediaPortugues >= 9.1 and textMediaPortugues <= 9.4):
             textMediaPortugues = 9.5
         elif (textMediaPortugues >= 9.6 and textMediaPortugues <= 9.9):
             textMediaPortugues = 10.0
 
         resultadoTextMediaPortugues = str(textMediaPortugues).replace(".", ",")
-        print("Média em Portugues: ", resultadoTextMediaPortugues[0:3])
+        print("Média:", resultadoTextMediaPortugues[0:4])
+
+        resultadoAprovacaoTextMediaPortugues = float(resultadoTextMediaPortugues.replace(",", "."))
+
+        resultado_final_portugues = {}
+
+        if (notMedia4BimestrePortugues is True) and (resultadoAprovacaoTextMediaPortugues < 6.0):
+            resultado_final = "Falta nota para conclusão."
+            print(f"Resultado Final: {resultado_final} 😬")
+
+            resultado_final_portugues = {
+                "nota_faltando": True,
+                "resultado": resultado_final
+            }
+        elif (notMedia4BimestrePortugues is True) and (resultadoAprovacaoTextMediaPortugues >= 6.0):
+            resultado_final = "Aprovado com antecedência!"
+            print(f"Resultado Final: {resultado_final} 🥳")
+
+            resultado_final_portugues = {
+                "nota_faltando": False,
+                "resultado": resultado_final
+            }
+        elif (resultadoAprovacaoTextMediaPortugues >= 6.0):
+            resultado_final = "Aprovado!"
+            print(f"Resultado Final: {resultado_final} 🥳")
+
+            resultado_final_portugues = {
+                "nota_faltando": False,
+                "resultado": resultado_final
+            }
+        else:
+            resultado_final = "Recuperação!"
+            print(f"Resultado Final: {resultado_final} 😓")
+
+            resultado_final_portugues = {
+                "nota_faltando": False,
+                "resultado": resultado_final
+            }
 
         print("\n---------------------------- \n")
-
 
         # Pegando as média de Matematica
         elementMedia1BimestreMatematica = WebDriverWait(driver, 5).until(
@@ -925,19 +1173,22 @@ def structure():
         textMedia2BimestreMatematica = elementMedia2BimestreMatematica.text
         textMedia3BimestreMatematica = elementMedia3BimestreMatematica.text
         textMedia4BimestreMatematica = elementMedia4BimestreMatematica.text
+        notMedia4BimestreMatematica = False
 
-        print("Nota 1 Bimestre de Matematica: ", textMedia1BimestreMatematica)
+        print("Matéria: Matemática")
+        print("1º Bimestre:", textMedia1BimestreMatematica)
         if (textMedia1BimestreMatematica == "-"):
             textMedia1BimestreMatematica = 0
-        print("Nota 2 Bimestre de Matematica: ", textMedia2BimestreMatematica)
+        print("2º Bimestre:", textMedia2BimestreMatematica)
         if (textMedia2BimestreMatematica == "-"):
             textMedia2BimestreMatematica = 0
-        print("Nota 3 Bimestre de Matematica: ", textMedia3BimestreMatematica)
+        print("3º Bimestre:", textMedia3BimestreMatematica)
         if (textMedia3BimestreMatematica == "-"):
             textMedia3BimestreMatematica = 0
-        print("Nota 4 Bimestre de Matematica: ", textMedia4BimestreMatematica)
+        print("4º Bimestre:", textMedia4BimestreMatematica)
         if (textMedia4BimestreMatematica == "-"):
             textMedia4BimestreMatematica = 0
+            notMedia4BimestreMatematica = True
 
         if not isinstance(textMedia1BimestreMatematica, int):
             textMedia1BimestreMatematica = textMedia1BimestreMatematica.replace(",", ".")
@@ -989,13 +1240,49 @@ def structure():
             textMediaMatematica = 8.5
         elif (textMediaMatematica >= 8.6 and textMediaMatematica <= 8.9):
             textMediaMatematica = 9.0
-        elif (textMediaMatematica >= 9.1 and textMediaMatematica <= 6.4):
+        elif (textMediaMatematica >= 9.1 and textMediaMatematica <= 9.4):
             textMediaMatematica = 9.5
         elif (textMediaMatematica >= 9.6 and textMediaMatematica <= 9.9):
             textMediaMatematica = 10.0
 
         resultadoTextMediaMatematica = str(textMediaMatematica).replace(".", ",")
-        print("Média em Matematica: ", resultadoTextMediaMatematica[0:3])
+        print("Média: ", resultadoTextMediaMatematica[0:4])
+
+        resultadoAprovacaoTextMediaMatematica = float(resultadoTextMediaMatematica.replace(",", "."))
+        resultado_final_matematica = {}
+
+        if (notMedia4BimestreMatematica is True) and (resultadoAprovacaoTextMediaMatematica < 6.0):
+            resultado_final = "Falta nota para conclusão."
+            print(f"Resultado Final: {resultado_final} 😬")
+
+            resultado_final_matematica = {
+                "nota_faltando": True,
+                "resultado": resultado_final
+            }
+        elif (notMedia4BimestreMatematica is True) and (resultadoAprovacaoTextMediaMatematica >= 6.0):
+            resultado_final = "Aprovado com antecedência!"
+            print(f"Resultado Final: {resultado_final} 🥳")
+
+            resultado_final_matematica = {
+                "nota_faltando": False,
+                "resultado": resultado_final
+            }
+        elif (resultadoAprovacaoTextMediaMatematica >= 6.0):
+            resultado_final = "Aprovado!"
+            print(f"Resultado Final: {resultado_final} 🥳")
+
+            resultado_final_matematica = {
+                "nota_faltando": False,
+                "resultado": resultado_final
+            }
+        else:
+            resultado_final = "Recuperação!"
+            print(f"Resultado Final: {resultado_final} 😓")
+
+            resultado_final_matematica = {
+                "nota_faltando": False,
+                "resultado": resultado_final
+            }
 
         print("\n---------------------------- \n")
 
@@ -1016,19 +1303,22 @@ def structure():
         textMedia2BimestreQuimica = elementMedia2BimestreQuimica.text
         textMedia3BimestreQuimica = elementMedia3BimestreQuimica.text
         textMedia4BimestreQuimica = elementMedia4BimestreQuimica.text
+        notMedia4BimestreQuimica = False
 
-        print("Nota 1 Bimestre de Quimica: ", textMedia1BimestreQuimica)
+        print("Matéria: Quimica")
+        print("1º Bimestre:", textMedia1BimestreQuimica)
         if (textMedia1BimestreQuimica == "-"):
             textMedia1BimestreQuimica = 0
-        print("Nota 2 Bimestre de Quimica: ", textMedia2BimestreQuimica)
+        print("2º Bimestre:", textMedia2BimestreQuimica)
         if (textMedia2BimestreQuimica == "-"):
             textMedia2BimestreQuimica = 0
-        print("Nota 3 Bimestre de Quimica: ", textMedia3BimestreQuimica)
+        print("3º Bimestre:", textMedia3BimestreQuimica)
         if (textMedia3BimestreQuimica == "-"):
             textMedia3BimestreQuimica = 0
-        print("Nota 4 Bimestre de Quimica: ", textMedia4BimestreQuimica)
+        print("4º Bimestre:", textMedia4BimestreQuimica)
         if (textMedia4BimestreQuimica == "-"):
             textMedia4BimestreQuimica = 0
+            notMedia4BimestreQuimica = True
 
         if not isinstance(textMedia1BimestreQuimica, int):
             textMedia1BimestreQuimica = textMedia1BimestreQuimica.replace(",", ".")
@@ -1080,13 +1370,49 @@ def structure():
             textMediaQuimica = 8.5
         elif (textMediaQuimica >= 8.6 and textMediaQuimica <= 8.9):
             textMediaQuimica = 9.0
-        elif (textMediaQuimica >= 9.1 and textMediaQuimica <= 6.4):
+        elif (textMediaQuimica >= 9.1 and textMediaQuimica <= 9.4):
             textMediaQuimica = 9.5
         elif (textMediaQuimica >= 9.6 and textMediaQuimica <= 9.9):
             textMediaQuimica = 10.0
 
         resultadoTextMediaQuimica = str(textMediaQuimica).replace(".", ",")
-        print("Média em Quimica: ", resultadoTextMediaQuimica[0:3])
+        print("Média:", resultadoTextMediaQuimica[0:4])
+
+        resultadoAprovacaoTextMediaQuimica = float(resultadoTextMediaQuimica.replace(",", "."))
+        dados_resultado = {}
+
+        if (notMedia4BimestreQuimica is True) and (resultadoAprovacaoTextMediaQuimica < 6.0):
+            resultado_final = "Falta nota para conclusão."
+            print(f"Resultado Final: {resultado_final} 😬")
+
+            resultado_final_quimica = {
+                "nota_faltando": True,
+                "resultado": resultado_final 
+            }
+        elif (notMedia4BimestreQuimica is True) and (resultadoAprovacaoTextMediaQuimica >= 6.0):
+            resultado_final = "Aprovado com antecedência!"
+            print(f"Resultado Final: {resultado_final} 🥳")
+
+            resultado_final_quimica = {
+                "nota_faltando": False,
+                "resultado": resultado_final 
+            }
+        elif (resultadoAprovacaoTextMediaQuimica >= 6.0):
+            resultado_final = "Aprovado!"
+            print(f"Resultado Final: {resultado_final} 🥳")
+
+            resultado_final_quimica = {
+                "nota_faltando": False,
+                "resultado": resultado_final 
+            }
+        else:
+            resultado_final = "Recuperação!"
+            print(f"Resultado Final: {resultado_final} 😓")
+
+            resultado_final_quimica = {
+                "nota_faltando": False,
+                "resultado": resultado_final 
+            }
 
         print("\n---------------------------- \n")
 
@@ -1109,8 +1435,6 @@ def structure():
         textPercentualFalta4Bi = elementPercentualFalta4Bi.text[0:5].replace(",", ".").replace("%", "")
 
         somaPercentualFalta = float(textPercentualFalta1Bi) + float(textPercentualFalta2Bi) + float(textPercentualFalta3Bi) + float(textPercentualFalta4Bi)
-        # somaPercentualFalta = float(textPercentualFalta1Bi) + float(textPercentualFalta2Bi) + float(textPercentualFalta3Bi) + float(textPercentualFalta4Bi)
-        # converterPercentualFalta = float(textPercentualFalta1Bi) + float(textPercentualFalta2Bi) + float(textPercentualFalta3Bi) + float(textPercentualFalta4Bi)
         print("Percentual Total de Faltas do ano:", str(somaPercentualFalta)[0:5] + "%")
 
         print("\n---------------------------- \n")
@@ -1174,11 +1498,14 @@ def structure():
                 "4Bimestre": textMedia4BimestreQuimica,
                 "mediaAnual": resultadoTextMediaQuimica
             },
+            
         }
 
-        generating_pdf(medias, primeiroNomeEstudante, somaPercentualFalta)
+        generating_pdf(medias, primeiroNomeEstudante, somaPercentualFalta, resultado_final_biologia,
+        resultado_final_fisica, resultado_final_geografia, resultado_final_historia, resultado_final_ingles,
+        resultado_final_portugues, resultado_final_matematica, resultado_final_quimica)
 
-        # Deixa o prompt 1 minuto aberto.
+        # Deixa o prompt 10 segundos aberto.
         time.sleep(10)
 
         # Fecha o navegador
@@ -1192,4 +1519,3 @@ def structure():
         # Ultima Atualização: 28/05 as 13:36h
 
 structure()
-
